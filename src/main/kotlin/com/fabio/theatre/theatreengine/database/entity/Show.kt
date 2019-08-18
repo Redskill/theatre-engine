@@ -9,7 +9,13 @@ data class Show(@Id
                 val id: Int,
                 val title: String,
 
-                @ManyToOne
+                @ManyToOne(
+                    fetch = FetchType.LAZY,
+                    cascade = [
+                      CascadeType.DETACH,
+                      CascadeType.MERGE,
+                      CascadeType.PERSIST,
+                      CascadeType.REFRESH])
                 val venue: Venue,
                 val description: String,
                 val runtime: Int,

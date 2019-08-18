@@ -10,8 +10,14 @@ data class Booking(@Id
                    @ManyToOne
                    val customer: Customer,
 
-                   @ManyToOne
+                   @OneToOne(
+                       fetch = FetchType.LAZY,
+                       cascade = [
+                         CascadeType.DETACH,
+                         CascadeType.MERGE,
+                         CascadeType.PERSIST,
+                         CascadeType.REFRESH])
                    val show: Show,
 
-                   @ManyToOne
-                   val seat: Seat)
+                   @OneToMany
+                   val seat: List<Seat>)

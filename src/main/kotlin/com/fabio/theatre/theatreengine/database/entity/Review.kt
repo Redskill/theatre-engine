@@ -7,10 +7,17 @@ data class Review (@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 
                    val description: String,
 
-                   @ManyToOne(fetch = FetchType.LAZY)
-                   @JoinColumn
+                   @ManyToOne(
+                       fetch = FetchType.LAZY,
+                       cascade = [
+                         CascadeType.DETACH,
+                         CascadeType.MERGE,
+                         CascadeType.PERSIST,
+                         CascadeType.REFRESH])
                    val customer: Customer,
 
-                   @ManyToOne(cascade = [CascadeType.ALL])
+                   @ManyToOne(
+                       fetch = FetchType.LAZY,
+                       cascade = [CascadeType.ALL])
                    val show: Show)
 
