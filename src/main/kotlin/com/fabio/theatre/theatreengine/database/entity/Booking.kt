@@ -8,10 +8,10 @@ data class Booking(@Id
                    val id: Int,
 
                    @ManyToOne
-                   val customer_id: Customer,
+                   val customer: Customer,
 
                    @ManyToOne
                    val show: Show,
 
                    @ManyToOne
-                   val seat_id: Seat)
+                   val seat: Seat)
