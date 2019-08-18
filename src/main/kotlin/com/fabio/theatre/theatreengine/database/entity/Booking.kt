@@ -2,6 +2,7 @@ package com.fabio.theatre.theatreengine.database.entity
 
 import javax.persistence.*
 
+@Entity
 data class Booking(@Id
                    @GeneratedValue(strategy = GenerationType.IDENTITY)
                    val id: Int,
@@ -10,7 +11,7 @@ data class Booking(@Id
                    val customer_id: Customer,
 
                    @ManyToOne
-                   val show_id: Show,
+                   val show: Show,
 
                    @ManyToOne
                    val seat_id: Seat)
