@@ -19,5 +19,6 @@ data class Show(@Id
                 val venue: Venue,
                 val description: String,
                 val runtime: Int,
-                val show_date: LocalDate) {
+                val show_date: LocalDate,
+                val image_path : String) {
 }

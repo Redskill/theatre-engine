@@ -17,7 +17,7 @@ class CustomerController {
 
 
     // READ from DB
-    @GetMapping
+    @GetMapping("/all")
     fun getCustomer() : List<Customer> {
         return service.allCustomers
     }
