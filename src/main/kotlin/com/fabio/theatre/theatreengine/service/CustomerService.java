@@ -1,8 +1,6 @@
 package com.fabio.theatre.theatreengine.service;
 
-import com.fabio.theatre.theatreengine.database.entity.Booking;
 import com.fabio.theatre.theatreengine.database.entity.Customer;
-import com.fabio.theatre.theatreengine.database.repository.BookingRepository;
 import com.fabio.theatre.theatreengine.database.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {

@@ -1,6 +1,5 @@
 package com.fabio.theatre.theatreengine.service;
 
-import com.fabio.theatre.theatreengine.database.entity.Show;
 import com.fabio.theatre.theatreengine.database.entity.Venue;
 import com.fabio.theatre.theatreengine.database.repository.VenueRepository;
 import org.springframework.beans.factory.annotation.Autowired;

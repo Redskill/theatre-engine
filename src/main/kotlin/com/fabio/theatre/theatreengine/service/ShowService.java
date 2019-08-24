@@ -19,14 +19,13 @@ public class ShowService {
         Show theLionKing = list.get(0);
         Show wicked = list.get(1);
         Show cirqueDuSoleil = list.get(2);
-        Show lesMiserables = list.get(3);
+//        Show lesMiserables = list.get(3);
         List<Show> newList = new ArrayList<>();
         newList.add(theLionKing);
         newList.add(wicked);
         newList.add(cirqueDuSoleil);
-        newList.add(lesMiserables);
+//        newList.add(lesMiserables);
         return newList;
-
     }
     public Show getShowById(Integer id) {
         return showRepository.findById(id).orElseThrow(RuntimeException::new);

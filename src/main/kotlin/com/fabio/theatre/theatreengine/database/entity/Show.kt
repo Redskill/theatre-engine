@@ -4,6 +4,7 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
+@Table(name = "`show`")
 data class Show(@Id
                 @GeneratedValue(strategy = GenerationType.IDENTITY)
                 val id: Int,
@@ -16,8 +17,10 @@ data class Show(@Id
                       CascadeType.MERGE,
                       CascadeType.PERSIST,
                       CascadeType.REFRESH])
+                @JoinColumn(name = "venue_id")
                 val venue: Venue,
                 val description: String,
+                val genre: String,
                 val runtime: Int,
                 val show_date: LocalDate,
                 val image_path : String) {
