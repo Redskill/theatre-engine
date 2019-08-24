@@ -25,4 +25,9 @@ class ShowController {
     return service.getShowById(id)
   }
 
+  @GetMapping("/{id}/{genre}")
+  fun getShowByVenueAndGenre(@PathVariable id: Int, @PathVariable genre: String) : List<Show> {
+    return service.findShowByVenueIdAndGenre(id, genre)
+  }
+
 }

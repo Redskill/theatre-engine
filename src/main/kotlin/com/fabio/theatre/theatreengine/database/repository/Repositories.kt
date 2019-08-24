@@ -9,5 +9,8 @@ interface BookingRepository : JpaRepository<Booking, Int>
 interface CustomerRepository : JpaRepository<Customer, Int>
 interface ReviewRepository : JpaRepository<Review, Int>
 interface SeatRepository : JpaRepository<Seat, Int>
-interface ShowRepository : JpaRepository<Show, Int>
+interface ShowRepository : JpaRepository<Show, Int> {
+  fun findByVenueId(id: Int) : List<Show>
+  fun findByVenueIdAndGenre(id: Int, genre: String) : List<Show>
+}
 interface VenueRepository : JpaRepository<Venue, Int>

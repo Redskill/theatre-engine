@@ -9,21 +9,31 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/customer")
 class CustomerController {
 
-//    @Autowired
-//    lateinit var repository : CustomerRepository
-
     @Autowired
     lateinit var service : CustomerService
 
-
-    // READ from DB
     @GetMapping("/all")
-    fun getCustomer() : List<Customer> {
+    fun getAllCustomers() : List<Customer> {
         return service.allCustomers
     }
 
-//    @PostMapping
-//        @DeleteMapping
+    @GetMapping("/{id}")
+    fun getCustomer(@PathVariable id: Int) : Customer {
+        return service.getCustomerById(id)
+    }
 
+    @DeleteMapping("/{id}")
+    fun deleteCustomer(@PathVariable id: Int) {
+        service.deleteById(id)
+    }
 
+    @PostMapping
+    fun updateCustomer(@RequestBody customer: Customer) : Customer {
+        return service.updateCustomer(customer)
+    }
+
+    @PutMapping
+    fun saveCustomer(@RequestBody customer: Customer) : Customer {
+        return service.saveCustomer(customer)
+    }
 }

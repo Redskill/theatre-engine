@@ -45,4 +45,12 @@ public class ShowService {
         return show;
     }
 
+    public List<Show> findShowByVenueId(Integer id) {
+        return showRepository.findByVenueId(id);
+    }
+
+    public List<Show> findShowByVenueIdAndGenre(Integer id, String genre) {
+        return showRepository.findByVenueIdAndGenre(id, genre);
+    }
+
 }
