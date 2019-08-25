@@ -4,6 +4,7 @@ package com.fabio.theatre.theatreengine.database.repository
 import com.fabio.theatre.theatreengine.database.entity.*
 //import com.fabio.theatre.theatreengine.database.entity.Review
 import org.springframework.data.jpa.repository.JpaRepository
+import javax.persistence.Id
 
 interface BookingRepository : JpaRepository<Booking, Int>
 interface CustomerRepository : JpaRepository<Customer, Int>
