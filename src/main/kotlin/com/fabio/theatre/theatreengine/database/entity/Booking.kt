@@ -19,5 +19,9 @@ data class Booking(@Id
                          CascadeType.REFRESH])
                    val show: Show,
 
-                   @OneToMany
+                   @OneToMany(fetch = FetchType.EAGER, cascade = [
+                     CascadeType.DETACH,
+                     CascadeType.MERGE,
+                     CascadeType.PERSIST,
+                     CascadeType.REFRESH])
                    val seat: List<Seat>)

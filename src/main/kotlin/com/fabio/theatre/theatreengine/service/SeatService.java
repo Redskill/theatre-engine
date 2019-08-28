@@ -23,22 +23,16 @@ public class SeatService {
     @Autowired
     private SeatRepository seatRepository;
 
-    public List<Seat> getAllSeats() {
-     List<Seat> list = seatRepository.findAll();
-     Seat seat1 = list.get(0);
-     Seat seat2 = list.get(1);
-     Seat seat3 = list.get(2);
-     List<Seat> newList = new ArrayList<>();
-     newList.add(seat1);
-     newList.add(seat2);
-     newList.add(seat3);
-     return newList;
-    }
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @Autowired
-    BookingRepository bookingRepository;
-    @Autowired
-    ShowRepository showRepository;
+    private ShowRepository showRepository;
+
+    public List<Seat> getAllSeats() {
+     return seatRepository.findAll();
+    }
+
 
     public boolean checkSeatAvailability(Integer seatId, Integer showId, LocalDate date) {
         Seat seatRequested = seatRepository.findById(seatId).get();
@@ -85,6 +79,7 @@ public class SeatService {
     public Seat getSeatById(Integer id) {
         return seatRepository.findById(id).orElseThrow(RuntimeException::new);
     }
+
     public void deleteById(Integer id) {
         Optional<Seat> seat = seatRepository.findById(id);
         if (seat.isPresent()) {
