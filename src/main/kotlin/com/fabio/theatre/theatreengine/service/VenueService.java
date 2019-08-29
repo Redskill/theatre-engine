@@ -49,7 +49,7 @@ public class VenueService {
         venueRepository.save(venue);
         return venue;
     }
-    public Venue saveShow(Venue venue){
+    public Venue saveVenue(Venue venue){
         venueRepository.save(venue);
         return venue;
     }

@@ -24,4 +24,4 @@ data class Booking(@Id
                      CascadeType.MERGE,
                      CascadeType.PERSIST,
                      CascadeType.REFRESH])
-                   val seat: List<Seat>)
+                   val seat: MutableList<Seat>)
