@@ -22,6 +22,8 @@ data class Show(@Id
                 val description: String,
                 val genre: String,
                 val runtime: Int,
-                val show_date: LocalDate,
+                @ElementCollection
+                @CollectionTable(name = "show_date")
+                val show_date: MutableList<String>,
                 val image_path : String) {
 }

@@ -39,21 +39,29 @@ public class DummyData {
    */
   @PostConstruct
   private void init() {
-    Venue vasquez = new Venue(99, "Vasquez", "Camden town");
+    Venue vasquez = new Venue(99, "Cinestar", "Stevenage");
     venueService.saveVenue(vasquez);
+//
+//
+//    Customer customer = customerService.getCustomerById(3);
+//    Seat seat4 = seatService.getSeatById(4);
+//    Seat seat7 = seatService.getSeatById(7);
+//    Show show9 = showService.getShowById(9);
+//    List<Seat> seatList = new ArrayList<>();
+//    seatList.add(seat4);
+//    seatList.add(seat7);
+//
+//    Booking booking = new Booking(99, customer, show9, seatList);
+//    bookingService.createBooking(booking);
+//
+//    log.info("Booking Saved ==============================");
 
-
-    Customer customer = customerService.getCustomerById(3);
-    Seat seat4 = seatService.getSeatById(4);
-    Seat seat7 = seatService.getSeatById(7);
-    Show show9 = showService.getShowById(9);
-    List<Seat> seatList = new ArrayList<>();
-    seatList.add(seat4);
-    seatList.add(seat7);
-
-    Booking booking = new Booking(99, customer, show9, seatList);
-    bookingService.createBooking(booking);
-
-    log.info("Booking Saved ==============================");
+    List<String> dates = new ArrayList<>();
+    dates.add("2019/02/03");
+    dates.add("2019/02/10");
+    dates.add("2019/02/17");
+    Show newShow = new Show(99, "Phantom of the opera", vasquez, "Something", "genre",
+        84, dates, "image_path");
+    showService.saveShow(newShow);
   }
 }
