@@ -37,7 +37,7 @@ public class DummyData {
   /**
    * After the first run, comment out the annotation @PostConstruct to avoid Hibernate errors
    */
-  @PostConstruct
+//  @PostConstruct
   private void init() {
     Venue vasquez = new Venue(99, "Cinestar", "Stevenage");
     venueService.saveVenue(vasquez);

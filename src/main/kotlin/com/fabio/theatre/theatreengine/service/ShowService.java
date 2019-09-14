@@ -1,10 +1,10 @@
 package com.fabio.theatre.theatreengine.service;
+
 import com.fabio.theatre.theatreengine.database.entity.Show;
 import com.fabio.theatre.theatreengine.database.repository.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,17 +15,7 @@ public class ShowService {
     private ShowRepository showRepository;
 
     public List<Show> getAllshows() {
-        List<Show> list =  showRepository.findAll();
-        Show theLionKing = list.get(0);
-        Show wicked = list.get(1);
-        Show cirqueDuSoleil = list.get(2);
-//        Show lesMiserables = list.get(3);
-        List<Show> newList = new ArrayList<>();
-        newList.add(theLionKing);
-        newList.add(wicked);
-        newList.add(cirqueDuSoleil);
-//        newList.add(lesMiserables);
-        return newList;
+        return showRepository.findAll();
     }
     public Show getShowById(Integer id) {
         return showRepository.findById(id).orElseThrow(RuntimeException::new);
@@ -51,6 +41,10 @@ public class ShowService {
 
     public List<Show> findShowByVenueIdAndGenre(Integer id, String genre) {
         return showRepository.findByVenueIdAndGenre(id, genre);
+    }
+
+    public void deleteShow(Integer id) {
+        showRepository.deleteById(id);
     }
 
 }
