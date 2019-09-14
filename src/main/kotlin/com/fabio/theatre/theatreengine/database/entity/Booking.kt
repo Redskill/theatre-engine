@@ -10,7 +10,7 @@ data class Booking(@Id
                    @ManyToOne
                    val customer: Customer,
 
-                   @OneToOne(
+                   @ManyToOne(
                        fetch = FetchType.LAZY,
                        cascade = [
                          CascadeType.DETACH,
@@ -19,9 +19,12 @@ data class Booking(@Id
                          CascadeType.REFRESH])
                    val show: Show,
 
-                   @OneToMany(fetch = FetchType.EAGER, cascade = [
+                   @ManyToMany(fetch = FetchType.EAGER, cascade = [
                      CascadeType.DETACH,
                      CascadeType.MERGE,
                      CascadeType.PERSIST,
                      CascadeType.REFRESH])
-                   val seat: MutableList<Seat>)
+                   val seat: MutableList<Seat>,
+
+                   @Column(name = "show_date")
+                   val showDate: String)

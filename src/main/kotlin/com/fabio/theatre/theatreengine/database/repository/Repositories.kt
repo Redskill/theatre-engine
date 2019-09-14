@@ -6,7 +6,9 @@ import com.fabio.theatre.theatreengine.database.entity.*
 import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.Id
 
-interface BookingRepository : JpaRepository<Booking, Int>
+interface BookingRepository : JpaRepository<Booking, Int> {
+  fun findByShowId(id: Int) : List<Booking>
+}
 interface CustomerRepository : JpaRepository<Customer, Int>
 interface ReviewRepository : JpaRepository<Review, Int>
 interface SeatRepository : JpaRepository<Seat, Int>

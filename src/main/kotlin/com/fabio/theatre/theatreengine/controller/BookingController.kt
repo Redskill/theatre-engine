@@ -3,10 +3,7 @@ package com.fabio.theatre.theatreengine.controller
 import com.fabio.theatre.theatreengine.database.entity.Booking
 import com.fabio.theatre.theatreengine.service.BookingService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/booking")
@@ -23,5 +20,10 @@ class BookingController {
   @GetMapping("/{id}")
   fun getBooking(@PathVariable id: Int) : Booking {
     return service.getBooking(id)
+  }
+
+  @DeleteMapping("/{id}")
+  fun deleteBooking(@PathVariable id: Int) {
+    service.deleteBooking(id)
   }
 }

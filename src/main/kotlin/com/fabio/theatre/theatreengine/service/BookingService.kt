@@ -32,4 +32,8 @@ class BookingService {
   fun createBooking(booking: Booking) : Booking {
     return repository.save(booking)
   }
+
+  fun getBookingsByShowId(id: Int) : List<Booking> {
+    return repository.findByShowId(id)
+  }
 }

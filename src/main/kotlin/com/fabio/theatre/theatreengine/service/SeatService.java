@@ -7,6 +7,7 @@ import com.fabio.theatre.theatreengine.database.entity.Venue;
 import com.fabio.theatre.theatreengine.database.repository.BookingRepository;
 import com.fabio.theatre.theatreengine.database.repository.SeatRepository;
 import com.fabio.theatre.theatreengine.database.repository.ShowRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,26 +17,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SeatService {
 
-    @Autowired
-    private SeatRepository seatRepository;
+  @Autowired
+  private SeatRepository seatRepository;
 
-    @Autowired
-    private BookingRepository bookingRepository;
+  @Autowired
+  private BookingRepository bookingRepository;
 
-    @Autowired
-    private ShowRepository showRepository;
+  @Autowired
+  private ShowRepository showRepository;
 
-    public List<Seat> getAllSeats() {
-     return seatRepository.findAll();
-    }
+  public List<Seat> getAllSeats() {
+    return seatRepository.findAll();
+  }
 
 
-    public boolean checkSeatAvailability(Integer seatId, Integer showId, LocalDate date) {
-        Seat seatRequested = seatRepository.findById(seatId).get();
+  public boolean checkSeatAvailability(Integer seatId, Integer showId, LocalDate date) {
+    Seat seatRequested = seatRepository.findById(seatId).get();
 
 //        return bookingRepository.findAll()
 //                .stream()
@@ -45,54 +47,74 @@ public class SeatService {
 //                .collect(Collectors.toList())
 //                .isEmpty();
 
-        List<Booking> bookingList = bookingRepository.findAll();
-        List<Booking> filteredBooking = new ArrayList<>();
+    List<Booking> bookingList = bookingRepository.findAll();
+    List<Booking> filteredBooking = new ArrayList<>();
 
-        bookingList.forEach(booking -> {
-            if (booking.getShow().getId() == showId) {
-                filteredBooking.add(booking);}
-        });
+    bookingList.forEach(booking -> {
+      if (booking.getShow().getId() == showId) {
+        filteredBooking.add(booking);}
+    });
 
-        List<Booking> bookingWithShowAndSeat = new ArrayList<>();
+    List<Booking> bookingWithShowAndSeat = new ArrayList<>();
 
-        filteredBooking.forEach(booking -> {
-            List<Seat> seatsForThisBooking = booking.getSeat();
-            if (!seatsForThisBooking.contains(seatRequested)) {
-                bookingWithShowAndSeat.add(booking);
-            }
-        });
+    filteredBooking.forEach(booking -> {
+      List<Seat> seatsForThisBooking = booking.getSeat();
+      if (!seatsForThisBooking.contains(seatRequested)) {
+        bookingWithShowAndSeat.add(booking);
+      }
+    });
 
-        if (bookingWithShowAndSeat.isEmpty()) {
-            return true;
-        }
-        List<Booking> finalList = new ArrayList<>();
-        Show myShow = showRepository.findById(showId).get();
-
-        bookingWithShowAndSeat.forEach(booking -> {
-            if (!booking.getShow().getShow_date().equals(date)) {
-                finalList.add(booking);
-            }
-        });
-
-        return finalList.isEmpty();
+    if (bookingWithShowAndSeat.isEmpty()) {
+      return true;
     }
-    public Seat getSeatById(Integer id) {
-        return seatRepository.findById(id).orElseThrow(RuntimeException::new);
-    }
+    List<Booking> finalList = new ArrayList<>();
+    Show myShow = showRepository.findById(showId).get();
 
-    public void deleteById(Integer id) {
-        Optional<Seat> seat = seatRepository.findById(id);
-        if (seat.isPresent()) {
-            seatRepository.deleteById(id);
-        }
-    }
-    public Seat updateSeat (Seat seat) {
-        seatRepository.save(seat);
-        return seat;
-    }
-    public Seat saveSeat (Seat seat) {
-        seatRepository.save(seat);
-        return seat;
-    }
+    bookingWithShowAndSeat.forEach(booking -> {
+      if (!booking.getShow().getShow_date().equals(date)) {
+        finalList.add(booking);
+      }
+    });
 
+    return finalList.isEmpty();
+  }
+  public Seat getSeatById(Integer id) {
+    return seatRepository.findById(id).orElseThrow(RuntimeException::new);
+  }
+
+  public void deleteById(Integer id) {
+    Optional<Seat> seat = seatRepository.findById(id);
+    if (seat.isPresent()) {
+      seatRepository.deleteById(id);
+    }
+  }
+  public Seat updateSeat (Seat seat) {
+    seatRepository.save(seat);
+    return seat;
+  }
+  public Seat saveSeat (Seat seat) {
+    seatRepository.save(seat);
+    return seat;
+  }
+
+  public List<Seat> getAvailableSeats(Integer id, String date) {
+    List<Booking> bookingsForDate = new ArrayList<>();
+    List<Booking> bookingList = bookingRepository.findByShowId(id);
+    bookingList.forEach(booking -> {
+      if (booking.getShowDate().equals(date)) {
+        bookingsForDate.add(booking);
+      }
+    });
+
+    if (bookingsForDate.isEmpty()) {
+      return seatRepository.findAll();
+    }
+    List<Seat> seatPlant = seatRepository.findAll();
+    List<Seat> occupiedSeats = new ArrayList<>();
+    bookingsForDate.forEach(booking -> occupiedSeats.addAll(booking.getSeat()));
+
+    return seatPlant.stream()
+        .filter(e -> !occupiedSeats.contains(e))
+        .collect(Collectors.toList());
+  }
 }

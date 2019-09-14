@@ -28,6 +28,11 @@ class SeatController {
     return service.getSeatById(id)
   }
 
+  @GetMapping("/available/{showId}/{showDate}")
+  fun getAvailableSeats(@PathVariable showId: Int, @PathVariable showDate: String) : List<Seat> {
+    return service.getAvailableSeats(showId, showDate)
+  }
+
 
 }
 
