@@ -42,21 +42,21 @@ public class DummyData {
 //  @PostConstruct
   private void init() {
 
-//    Venue venue = venueService.getAllVenues().stream().findFirst().get();
-//
+    Venue venue = venueService.getAllVenues().stream().findFirst().get();
+
 //    List<String> dates = new ArrayList<>();
 //    dates.add("2020-2-02");
 //    dates.add("2020-12-30");
 //    dates.add("2020-4-6");
 //    dates.add("2020-9-18");
 //
-//    Show potter =
-//        new Show(99, "Harry Potter", venue, "Magic", "Fantasy", 143, dates, "no_image");
+//    Show lionking =
+//        new Show(99, "Harry Potter", venue, "The story follows Harry Potter, who has been tasked by Dumbledore with finding and destroying Lord Voldemort's secret to immortality – the Horcruxes.", "Fantasy", 146, dates, "http://10.0.2.2:8080/harrypotter.jpg");
 //
-//    showService.saveShow(potter);
+//    showService.saveShow(lionking);
 
     Customer customer = customerService.getAllCustomers().stream().findFirst().get();
-    Show show = showService.getAllshows().stream().filter(e -> e.getId() == 12).findFirst().get();
+    Show show = showService.getAllshows().stream().filter(e -> e.getId() == 10).findFirst().get();
 
 
     List<Seat> seatList = seatService.getAllSeats().stream().filter(e -> e.getId() < 6).collect(Collectors.toList());

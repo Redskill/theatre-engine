@@ -26,4 +26,9 @@ class BookingController {
   fun deleteBooking(@PathVariable id: Int) {
     service.deleteBooking(id)
   }
+
+  @PutMapping()
+  fun createBooking(@RequestBody booking: Booking) : Booking {
+    return service.createBooking(booking)
+  }
 }
