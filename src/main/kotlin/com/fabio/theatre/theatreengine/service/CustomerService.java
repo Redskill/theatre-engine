@@ -16,14 +16,7 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public List<Customer> getAllCustomers() {
-        List<Customer> list = customerRepository.findAll();
-        Customer fabio = list.get(0);
-        List<Customer> nueList = new ArrayList<>();
-        nueList.add(fabio);
-        nueList.add(fabio);
-        nueList.add(fabio);
-        nueList.add(fabio);
-        return nueList;
+        return customerRepository.findAll();
         // return customerRepository.findAll();
     }
 
