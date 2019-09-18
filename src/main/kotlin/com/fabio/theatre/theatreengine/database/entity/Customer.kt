@@ -2,6 +2,7 @@ package com.fabio.theatre.theatreengine.database.entity
 
 import javax.persistence.*
 
+
 @Entity
 data class Customer (@Id
                      @GeneratedValue(strategy= GenerationType.IDENTITY)
