@@ -1,6 +1,7 @@
 package com.fabio.theatre.theatreengine.controller
 
 import com.fabio.theatre.theatreengine.database.entity.Customer
+import com.fabio.theatre.theatreengine.database.model.NewCustomer
 import com.fabio.theatre.theatreengine.service.CustomerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -33,7 +34,7 @@ class CustomerController {
     }
 
     @PostMapping
-    fun saveCustomer(@RequestBody customer: Customer) : Customer {
+    fun saveCustomer(@RequestBody customer: NewCustomer) : Customer {
         return service.saveCustomer(customer)
     }
 }

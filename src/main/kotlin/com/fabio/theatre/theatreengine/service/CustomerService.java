@@ -1,6 +1,7 @@
 package com.fabio.theatre.theatreengine.service;
 
 import com.fabio.theatre.theatreengine.database.entity.Customer;
+import com.fabio.theatre.theatreengine.database.model.NewCustomer;
 import com.fabio.theatre.theatreengine.database.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,8 +58,8 @@ public class CustomerService {
         return customer;
     }
 
-    public Customer saveCustomer(Customer customer) {
-        customerRepository.save(customer);
-        return customer;
+    public Customer saveCustomer(NewCustomer customer) {
+        // TODO extract password and save in SystemUser
+        return customerRepository.save(customer.getCustomer());
     }
 }
