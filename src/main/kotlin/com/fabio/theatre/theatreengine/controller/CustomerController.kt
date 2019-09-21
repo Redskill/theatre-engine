@@ -27,12 +27,12 @@ class CustomerController {
         service.deleteById(id)
     }
 
-    @PostMapping
+    @PutMapping
     fun updateCustomer(@RequestBody customer: Customer) : Customer {
         return service.updateCustomer(customer)
     }
 
-    @PutMapping
+    @PostMapping
     fun saveCustomer(@RequestBody customer: Customer) : Customer {
         return service.saveCustomer(customer)
     }
