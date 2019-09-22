@@ -46,7 +46,7 @@ public class CustomerService {
     }
 
     public Customer saveCustomer(NewCustomer customer) {
-        systemUserRepository.save(new SystemUser(customer.getCustomer().getEmail(), customer.getPassword()));
+        systemUserRepository.save(new SystemUser(99 ,customer.getCustomer().getEmail(), customer.getPassword()));
         return customerRepository.save(customer.getCustomer());
     }
 }

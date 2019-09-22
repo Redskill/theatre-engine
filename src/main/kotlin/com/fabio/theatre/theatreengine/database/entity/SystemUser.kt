@@ -1,8 +1,9 @@
 package com.fabio.theatre.theatreengine.database.entity
 
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
-data class SystemUser (@Id val email : String,
+data class SystemUser (@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+                       val id: Int,
+                       val email : String,
                        val password : String)
