@@ -1,8 +1,10 @@
 package com.fabio.theatre.theatreengine.service;
 
 import com.fabio.theatre.theatreengine.database.entity.Customer;
+import com.fabio.theatre.theatreengine.database.entity.SystemUser;
 import com.fabio.theatre.theatreengine.database.model.NewCustomer;
 import com.fabio.theatre.theatreengine.database.repository.CustomerRepository;
+import com.fabio.theatre.theatreengine.database.repository.SystemUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,34 +18,19 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private SystemUserRepository systemUserRepository;
+
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
-        // return customerRepository.findAll();
     }
-
-//    private List<Booking> aMethod(Integer customerId) {
-//        List<Booking> bookingList = bookingRepository.findAll();
-//        List<Booking> customerBooking = new ArrayList<>();
-//
-//        bookingList.forEach(booking -> {
-//            if (booking.getCustomer().getId() == customerId) {
-//                customerBooking.add(booking);
-//            }
-//        });
-//        List<Booking> bookingStram = bookingList.stream()
-//                .filter(e -> e.getCustomer().getId() == customerId)
-//                .collect(Collectors.toList());
-//
-//        for (Booking booking : bookingList) {
-//            if (booking.getCustomer().getId() == customerId) {
-//                customerBooking.add(booking);
-//            }
-//        }
-//        return customerBooking;
-//    }
 
     public Customer getCustomerById(Integer id) {
         return customerRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 
     public void deleteById(Integer id) {
@@ -59,7 +46,7 @@ public class CustomerService {
     }
 
     public Customer saveCustomer(NewCustomer customer) {
-        // TODO extract password and save in SystemUser
+        systemUserRepository.save(new SystemUser(customer.getCustomer().getEmail(), customer.getPassword()));
         return customerRepository.save(customer.getCustomer());
     }
 }
