@@ -3,13 +3,10 @@ package com.fabio.theatre.theatreengine.controller
 import com.fabio.theatre.theatreengine.database.entity.Customer
 import com.fabio.theatre.theatreengine.database.entity.SystemUser
 import com.fabio.theatre.theatreengine.database.model.NewCustomer
-import com.fabio.theatre.theatreengine.errors.LoginFailedErrorResponse
 import com.fabio.theatre.theatreengine.exceptions.LoginNotValidException
 import com.fabio.theatre.theatreengine.service.CustomerService
 import com.fabio.theatre.theatreengine.service.SystemUserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -48,16 +45,6 @@ class CustomerController {
             throw LoginNotValidException("Invalid username or password. Retry.");
         }
         return service.getCustomerByEmail(systemUser.email)
-    }
-
-    @ExceptionHandler
-    fun handleException(exception: LoginNotValidException) : ResponseEntity<LoginFailedErrorResponse> {
-        var error = LoginFailedErrorResponse(
-            HttpStatus.FORBIDDEN.value(),
-            exception.message,
-            System.currentTimeMillis())
-
-        return ResponseEntity(error, HttpStatus.FORBIDDEN)
     }
 
     @PostMapping
