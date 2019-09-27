@@ -27,8 +27,9 @@ class BookingController {
     service.deleteBooking(id)
   }
 
-  @PutMapping()
+  @PostMapping()
   fun createBooking(@RequestBody booking: Booking) : Booking {
     return service.createBooking(booking)
   }
+
 }
