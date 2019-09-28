@@ -20,10 +20,7 @@ data class Booking(@Id
                    val show: Show,
 
                    @ManyToMany(fetch = FetchType.EAGER, cascade = [
-                     CascadeType.DETACH,
-                     CascadeType.MERGE,
-                     CascadeType.PERSIST,
-                     CascadeType.REFRESH])
+                     CascadeType.PERSIST])
                    val seat: MutableList<Seat>,
 
                    @Column(name = "show_date")

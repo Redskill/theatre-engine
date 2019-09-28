@@ -14,7 +14,7 @@ public class SystemUserService {
   private SystemUserRepository repository;
 
   public boolean checkAuth(SystemUser systemUser) {
-    Optional<SystemUser> user = repository.findById(systemUser.getEmail());
+    Optional<SystemUser> user = repository.findByEmail(systemUser.getEmail());
     return user.map(value -> value.getPassword().equals(systemUser.getPassword())).orElse(false);
   }
 }

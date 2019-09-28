@@ -5,6 +5,7 @@ import com.fabio.theatre.theatreengine.database.entity.*
 import com.fabio.theatre.theatreengine.database.entity.SystemUser
 //import com.fabio.theatre.theatreengine.database.entity.Review
 import org.springframework.data.jpa.repository.JpaRepository
+import java.util.*
 
 interface BookingRepository : JpaRepository<Booking, Int> {
   fun findByShowId(id: Int) : List<Booking>
@@ -19,4 +20,6 @@ interface ShowRepository : JpaRepository<Show, Int> {
   fun findByVenueIdAndGenre(id: Int, genre: String) : List<Show>
 }
 interface VenueRepository : JpaRepository<Venue, Int>
-interface SystemUserRepository : JpaRepository<SystemUser, String>
+interface SystemUserRepository : JpaRepository<SystemUser, String> {
+  fun findByEmail(email: String) : Optional<SystemUser>
+}
