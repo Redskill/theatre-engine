@@ -9,6 +9,7 @@ import java.util.*
 
 interface BookingRepository : JpaRepository<Booking, Int> {
   fun findByShowId(id: Int) : List<Booking>
+  fun findByCustomer_Id(id: Int) : List<Booking>
 }
 interface CustomerRepository : JpaRepository<Customer, Int> {
   fun findByEmail(email: String) : Customer

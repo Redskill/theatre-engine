@@ -36,4 +36,8 @@ class BookingService {
   fun getBookingsByShowId(id: Int) : List<Booking> {
     return repository.findByShowId(id)
   }
+
+  fun getBookingPerUserID(id: Int) : List<Booking> {
+    return repository.findByCustomer_Id(id)
+  }
 }

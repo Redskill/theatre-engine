@@ -32,4 +32,9 @@ class BookingController {
     return service.createBooking(booking)
   }
 
+  @GetMapping("/user/{id}")
+  fun getBookingForCustomer(@PathVariable id: Int) : List<Booking> {
+    return service.getBookingPerUserID(id)
+  }
+
 }
